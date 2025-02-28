@@ -1,0 +1,203 @@
+<html>   
+    
+    <head>
+        <title>Perceptron</title>
+        <meta charset="utf-8" />
+        <!--   <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />    -->
+        <!--     <script defer src="https://pyscript.net/latest/pyscript.js"></script>     -->
+       <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+        <!-- CSS for examples -->
+        
+         <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    </head>
+
+    <body>
+    <div>Create a T or an L </div>
+        
+
+     </table>
+     <table style = "border:3px solid #F7730E">
+        <tr>
+            <td><select id="Switch1">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch2">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch3">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch4">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td><select id="Switch5">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch6">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch7">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch8">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td><select id="Switch9">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch10">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch11">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch12">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td><select id="Switch13">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch14">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch15">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+            <td><select id="Switch16">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select></td>
+        </tr>
+    </table>
+     <button id="get-letter" py-click="my_gen_function"  class="py-button">Generate</button>
+
+     <div id="test-output">
+         
+     </div>
+
+        <section class="pyscript"> 
+            <div id="mpl"></div>
+
+          
+
+                <script type="py" config="pyscript.toml">
+                
+                    import numpy as np
+                    import pandas as pd
+                    import sklearn
+                    import random
+
+                    from sklearn.model_selection import train_test_split
+                    from sklearn import datasets
+                    from sklearn.preprocessing import LabelEncoder
+                    import matplotlib.pyplot as plt
+                    from pyodide.http import open_url
+                    from pyscript import display
+                    from pyweb import pydom
+
+                    #############################################################################
+
+                    def activation_function(z):
+                        return np.where( z>=0, 1, 0  )
+
+                    #############################################################################
+
+                    
+
+                    #####################################################################
+
+                
+
+                    
+                    #####################################################################
+
+                    random_seed = int( random.random() * 100 ) 
+
+                    #####################################################################
+                    weights = [0.001, 0.001, 0.003, 0.001, -0.001, 0.0, 0.001, 0.0, -0.001, 0.0,
+                    0.001, 0.0, -0.001, -0.001, -0.002, -0.002]
+
+                    weights_list = np.array(weights)
+
+                    bias = 0.0
+                    
+                    def predict(X_test, weights, bias):
+                        ## x * w
+                        linear_product = np.dot(X_test, weights) + bias    ## y = w*x + b
+                        y_pred  = activation_function(    linear_product    )
+                        return y_pred
+
+                    #####################################################################
+
+                    ## look at the test data
+                    testDataXandy = iris_np[130:150, :]
+                    str_np = np.array2string( testDataXandy, precision=2, separator=',', suppress_small=True)
+                    text = str(str_np)
+                    ## pydom['test-output'].innerHTML =  text   
+                    pydom["div#test-output"].html = text
+                    
+                    ######################################################################
+
+                    def get_np_conditions_vector():
+                        c1 = float( pydom["#Switch1"][0].value )
+                        c2 = float( pydom["#Switch2"][0].value )
+                        c3 = float( pydom["#Switch3"][0].value )
+                        c4 = float( pydom["#Switch4"][0].value )
+                        c5 = float( pydom["#Switch5"][0].value )
+                        c6 = float( pydom["#Switch6"][0].value )
+                        c7 = float( pydom["#Switch7"][0].value )
+                        c8 = float( pydom["#Switch8"][0].value )
+
+                        c9 = float( pydom["#Switch9"][0].value )
+                        c10 = float( pydom["#Switch10"][0].value )
+                        c11 = float( pydom["#Switch11"][0].value )
+                        c12 = float( pydom["#Switch12"][0].value )
+                        c13 = float( pydom["#Switch13"][0].value )
+                        c14 = float( pydom["#Switch14"][0].value )
+                        c15 = float( pydom["#Switch15"][0].value )
+                        c16 = float( pydom["#Switch16"][0].value )
+
+                        conditions_list = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16]
+                        np_conditions_list = np.array(conditions_list)
+                        np_conditions_list = np.expand_dims(np_conditions_list, axis=0)
+
+                        return np_conditions_list
+
+                    ######################################################################
+
+                    def my_gen_function(event):
+                        test_x = get_np_conditions_vector()
+                        the_pred = predict(test_X, weights_list, bias)
+                        text1 = np.array2string( test_x , precision=2, separator=',', suppress_small=True)
+                        text3 = str( the_pred )
+                        accum_res = "*******************\n" + "Predicted Class: " + text1 + "___"  + text3 + "\n"
+                        ## pydom['mpl'].content =  accum_res
+                        pydom["div#mpl"].html = accum_res
+                        
+ 
+                </script>
+        </section>
+    </body>
+</html>
