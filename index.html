@@ -178,7 +178,7 @@
 
                     def my_gen_function(event):
                         test_x = get_np_conditions_vector()
-                        the_pred = predict(test_X, weights_list, bias)
+                        the_pred = predict(test_x, weights_list, bias)
                         text1 = np.array2string( test_x , precision=2, separator=',', suppress_small=True)
                         text3 = str( the_pred )
                         accum_res = "*******************\n" + "Predicted Class: " + text1 + "___"  + text3 + "\n"
