@@ -106,12 +106,7 @@
                 
                     import numpy as np
                     import pandas as pd
-                    import sklearn
-                    import random
-
-                    from sklearn.model_selection import train_test_split
-                    from sklearn import datasets
-                    from sklearn.preprocessing import LabelEncoder
+                    
                     import matplotlib.pyplot as plt
                     from pyodide.http import open_url
                     from pyscript import display
@@ -133,11 +128,10 @@
                     
                     #####################################################################
 
-                    random_seed = int( random.random() * 100 ) 
+                    
 
                     #####################################################################
-                    weights = [0.001, 0.001, 0.003, 0.001, -0.001, 0.0, 0.001, 0.0, -0.001, 0.0,
-                    0.001, 0.0, -0.001, -0.001, -0.002, -0.002]
+                    weights = [0.001, 0.001, 0.003, 0.001, -0.001, 0.0, 0.001, 0.0, -0.001, 0.0, 0.001, 0.0, -0.001, -0.001, -0.002, -0.002]
 
                     weights_list = np.array(weights)
 
